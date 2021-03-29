@@ -1,10 +1,29 @@
 data "aws_vpc_endpoint_service" "s3" {
   service = "s3"
+  service_type = "Gateway"
 }
 
-data "aws_vpc_endpoint" "s3" {
+resource "aws_vpc_endpoint" "s3" {
   vpc_id       = aws_vpc.this.id
   service_name = data.aws_vpc_endpoint_service.s3.service_name
+  vpc_endpoint_type = "Gateway"
+  route_table_ids = [aws_route_table.private.id]
+
+  tags = merge({ Name = data.aws_vpc_endpoint_service.ssmmessages.service_name },
+  var.tags)
+}
+
+data "aws_vpc_endpoint_service" "ssm" {
+  service = "ssm"
+}
+
+resource "aws_vpc_endpoint" "ssm" {
+  vpc_id              = aws_vpc.this.id
+  service_name        = data.aws_vpc_endpoint_service.ssm.service_name
+  vpc_endpoint_type   = "Interface"
+  security_group_ids  = [aws_security_group.ssm.id]
+  subnet_ids          = [aws_subnet.private.id]
+  private_dns_enabled = true
 
   tags = merge({ Name = data.aws_vpc_endpoint_service.ssmmessages.service_name },
   var.tags)
@@ -19,7 +38,7 @@ resource "aws_vpc_endpoint" "ssmmessages" {
   service_name        = data.aws_vpc_endpoint_service.ssmmessages.service_name
   vpc_endpoint_type   = "Interface"
   security_group_ids  = [aws_security_group.ssm.id]
-  subnet_ids          = aws_subnet.private.id
+  subnet_ids          = [aws_subnet.private.id]
   private_dns_enabled = true
 
   tags = merge({ Name = data.aws_vpc_endpoint_service.ssmmessages.service_name },
@@ -35,7 +54,7 @@ resource "aws_vpc_endpoint" "ec2messages" {
   service_name        = data.aws_vpc_endpoint_service.ec2messages.service_name
   vpc_endpoint_type   = "Interface"
   security_group_ids  = [aws_security_group.ssm.id]
-  subnet_ids          = aws_subnet.private.id
+  subnet_ids          = [aws_subnet.private.id]
   private_dns_enabled = true
 
   tags = merge({ Name = data.aws_vpc_endpoint_service.ec2messages.service_name },

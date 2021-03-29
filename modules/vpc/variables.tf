@@ -10,8 +10,6 @@ variable "sensitive_subnet_cidr" {
   default = "10.0.2.0/24"
 }
 
-variable "ec2_migration_sg_id" {
-
-}
+variable "ec2_sg_id" {}
 
 variable "tags" {}

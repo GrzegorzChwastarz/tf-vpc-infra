@@ -13,5 +13,5 @@ resource "aws_security_group_rule" "ssm" {
   from_port                = 443
   to_port                  = 443
   protocol                 = "tcp"
-  source_security_group_id = var.ec2_migration_sg_id
+  source_security_group_id = var.ec2_sg_id
 }
