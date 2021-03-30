@@ -1,3 +1,6 @@
+# S3 Gateway endpoint for calls made from lambda and EC2 migration instance.
+# ssm/ssmmessages/ec2messages endpoints allow ssm session manager connection without Internet/Nat Gateway
+
 data "aws_vpc_endpoint_service" "s3" {
   service = "s3"
   service_type = "Gateway"
@@ -9,7 +12,7 @@ resource "aws_vpc_endpoint" "s3" {
   vpc_endpoint_type = "Gateway"
   route_table_ids = [aws_route_table.private.id]
 
-  tags = merge({ Name = data.aws_vpc_endpoint_service.ssmmessages.service_name },
+  tags = merge({ Name = data.aws_vpc_endpoint_service.s3.service_name },
   var.tags)
 }
 
@@ -25,7 +28,7 @@ resource "aws_vpc_endpoint" "ssm" {
   subnet_ids          = [aws_subnet.private.id]
   private_dns_enabled = true
 
-  tags = merge({ Name = data.aws_vpc_endpoint_service.ssmmessages.service_name },
+  tags = merge({ Name = data.aws_vpc_endpoint_service.ssm.service_name },
   var.tags)
 }
 
@@ -60,8 +63,6 @@ resource "aws_vpc_endpoint" "ec2messages" {
   tags = merge({ Name = data.aws_vpc_endpoint_service.ec2messages.service_name },
   var.tags)
 }
-
-
 
 
 
