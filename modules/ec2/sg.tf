@@ -1,6 +1,9 @@
 resource "aws_security_group" "ec2_migration_tier" {
+  name = "${var.tags["Project"]}-${var.tags["Environment"]}-migration-tier"
   vpc_id = var.vpc_id
   description = "Provides access to S3/Aurora/SSM parameter store"
+
+  tags =  var.tags
 }
 
 /*resource "aws_security_group_rule" "ec2_rds_egress" {
