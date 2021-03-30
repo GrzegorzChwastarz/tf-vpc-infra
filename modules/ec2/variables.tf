@@ -18,6 +18,10 @@ variable "vpce_s3" {
 
 }
 
+variable "ssm_sg_id" {
+
+}
+
 /*variable "rds_sg_id" {
 
 }
