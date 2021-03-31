@@ -1,7 +1,8 @@
 resource "aws_rds_cluster" "this" {
   cluster_identifier            = "${var.tags["Project"]}-${var.tags["Environment"]}-aurora"
-  database_name                 = "${var.tags["Project"]}-${var.tags["Environment"]}-aurora"
+  database_name                 = "s3_png_paths"
   engine                  = "aurora-postgresql"
+  engine_version = "11.9"
   master_username               = var.rds_master_username
   master_password               = var.rds_master_password
   db_subnet_group_name          = aws_db_subnet_group.this.name
@@ -13,6 +14,8 @@ resource "aws_rds_cluster" "this" {
 resource "aws_rds_cluster_instance" "aurora_cluster_instance" {
   identifier            = "${var.tags["Project"]}-${var.tags["Environment"]}-aurora-db"
   cluster_identifier    = aws_rds_cluster.this.id
+  engine = "aurora-postgresql"
+  engine_version = "11.9"
   instance_class        = var.instance_class
   db_subnet_group_name  = aws_db_subnet_group.this.name
 
@@ -22,7 +25,8 @@ resource "aws_rds_cluster_instance" "aurora_cluster_instance" {
 resource "aws_db_subnet_group" "this" {
   name          = "${var.tags["Project"]}-${var.tags["Environment"]}-subnet-group"
   description   = "Allowed subnets for Aurora DB cluster instances"
-  subnet_ids    = [var.vpc_module.sensitive_subnet_id]
+  subnet_ids    = [var.vpc_module.sensitive_subnet_id,
+                  var.vpc_module.sensitive_dummy_subnet_id]
 
   tags = var.tags
 }
