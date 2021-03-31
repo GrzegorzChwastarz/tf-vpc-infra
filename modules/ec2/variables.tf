@@ -22,10 +22,10 @@ variable "ssm_sg_id" {
 
 }
 
-/*variable "rds_sg_id" {
+variable "aurora_sg_id" {
 
 }
-*/
+
 variable "ec2_name" {
   default = "migration-tier"
 }
