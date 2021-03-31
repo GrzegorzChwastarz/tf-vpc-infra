@@ -2,15 +2,15 @@
 # ssm/ssmmessages/ec2messages endpoints allow ssm session manager connection without Internet/Nat Gateway
 
 data "aws_vpc_endpoint_service" "s3" {
-  service = "s3"
+  service      = "s3"
   service_type = "Gateway"
 }
 
 resource "aws_vpc_endpoint" "s3" {
-  vpc_id       = aws_vpc.this.id
-  service_name = data.aws_vpc_endpoint_service.s3.service_name
+  vpc_id            = aws_vpc.this.id
+  service_name      = data.aws_vpc_endpoint_service.s3.service_name
   vpc_endpoint_type = "Gateway"
-  route_table_ids = [aws_route_table.private.id]
+  route_table_ids   = [aws_route_table.private.id]
 
   tags = merge({ Name = data.aws_vpc_endpoint_service.s3.service_name },
   var.tags)
