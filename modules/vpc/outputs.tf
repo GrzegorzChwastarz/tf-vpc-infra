@@ -10,6 +10,10 @@ output "sensitive_subnet_id" {
   value = aws_subnet.sensitive.id
 }
 
+output "sensitive_dummy_subnet_id" {
+  value = aws_subnet.sensitive_dummy.id
+}
+
 output "vpce_s3" {
   value = aws_vpc_endpoint.s3
 }
