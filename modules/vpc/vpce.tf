@@ -1,5 +1,6 @@
-# S3 Gateway endpoint for calls made from lambda and EC2 migration instance.
+# s3 gateway endpoint for calls made from lambda and EC2 migration instance + ability to use yum without connection to the internet
 # ssm/ssmmessages/ec2messages endpoints allow ssm session manager connection without Internet/Nat Gateway
+# rds endpoint to connect between private and sensitive subnet
 
 data "aws_vpc_endpoint_service" "s3" {
   service      = "s3"
@@ -64,6 +65,20 @@ resource "aws_vpc_endpoint" "ec2messages" {
   var.tags)
 }
 
+data "aws_vpc_endpoint_service" "rds" {
+  service = "rds"
+}
 
+resource "aws_vpc_endpoint" "rds" {
+  vpc_id              = aws_vpc.this.id
+  service_name        = data.aws_vpc_endpoint_service.rds.service_name
+  vpc_endpoint_type   = "Interface"
+  security_group_ids  = [aws_security_group.rds_endpoint.id]
+  subnet_ids          = [aws_subnet.private.id]
+  private_dns_enabled = true
+
+  tags = merge({ Name = data.aws_vpc_endpoint_service.ec2messages.service_name },
+  var.tags)
+}
 
 
