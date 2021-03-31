@@ -1,4 +1,3 @@
-files: ^subdir/
 repos:
   - repo: git://github.com/antonbabenko/pre-commit-terraform
     rev: v1.48.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
