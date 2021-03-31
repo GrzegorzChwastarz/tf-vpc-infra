@@ -4,7 +4,7 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
 }
 
 resource "aws_iam_role" "ec2" {
-  name = "${var.tags["Project"]}-${var.tags["Environment"]}-ec2"
+  name               = "${var.tags["Project"]}-${var.tags["Environment"]}-ec2"
   assume_role_policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -96,7 +96,7 @@ resource "aws_iam_role_policy_attachment" "s3_policy_role_attachment" {
 }
 
 resource "aws_iam_policy" "s3" {
-  name = "${var.tags["Project"]}-${var.tags["Environment"]}-s3"
+  name        = "${var.tags["Project"]}-${var.tags["Environment"]}-s3"
   description = "S3 policy for S3 bucket operations"
 
   policy = <<EOF
