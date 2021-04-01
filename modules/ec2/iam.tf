@@ -149,7 +149,7 @@ resource "aws_iam_policy" "rds" {
       {
          "Effect":"Allow",
          "Action": "rds:DescribeDBInstances",
-         "*"
+         "Resource": "*"
       }
    ]
 }
