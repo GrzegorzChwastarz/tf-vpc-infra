@@ -12,7 +12,7 @@ variable "sensitive_subnet_cidr" {
 
 variable "sensitive_dummy_subnet_cidr" {
   description = "Subnet that is only for preventing error caused by multi-az requirement from Aurora db subnet group"
-  default = "10.0.3.0/24"
+  default     = "10.0.3.0/24"
 }
 
 variable "ec2_sg_id" {}

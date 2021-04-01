@@ -24,12 +24,22 @@ resource "aws_security_group" "rds_endpoint" {
   tags = var.tags
 }
 
-resource "aws_security_group_rule" "rds" {
+resource "aws_security_group_rule" "rds_postgre" {
   security_group_id        = aws_security_group.rds_endpoint.id
   description              = "Rule allowing connection to the RDS endpoint from EC2 and lambda"
   type                     = "ingress"
   from_port                = 5432
   to_port                  = 5432
+  protocol                 = "tcp"
+  source_security_group_id = var.ec2_sg_id
+}
+
+resource "aws_security_group_rule" "rds_api" {
+  security_group_id        = aws_security_group.rds_endpoint.id
+  description              = "Rule allowing connection to the RDS endpoint API"
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
   protocol                 = "tcp"
   source_security_group_id = var.ec2_sg_id
 }

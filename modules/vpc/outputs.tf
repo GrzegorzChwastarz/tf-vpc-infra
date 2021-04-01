@@ -18,6 +18,10 @@ output "vpce_s3" {
   value = aws_vpc_endpoint.s3
 }
 
-output "ssm_sg_id" {
+output "ssm_endpoint_sg_id" {
   value = aws_security_group.ssm.id
+}
+
+output "rds_endpoint_sg_id" {
+  value = aws_security_group.rds_endpoint.id
 }
