@@ -1,3 +1,5 @@
+# I totally know that below policies should be limited to specific resources by ARNs output from given modules but time is a factor here...
+
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
   name = "${var.tags["Project"]}-${var.tags["Environment"]}-ec2-profile"
   role = aws_iam_role.ec2.name
@@ -95,6 +97,7 @@ resource "aws_iam_role_policy_attachment" "s3_policy_role_attachment" {
   policy_arn = aws_iam_policy.s3.arn
 }
 
+
 resource "aws_iam_policy" "s3" {
   name        = "${var.tags["Project"]}-${var.tags["Environment"]}-s3"
   description = "S3 policy for S3 bucket operations"
@@ -123,6 +126,30 @@ resource "aws_iam_policy" "s3" {
             "s3:DeleteObject"
          ],
          "Resource":"arn:aws:s3:::*"
+      }
+   ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "rds_policy_role_attachment" {
+  role       = aws_iam_role.ec2.name
+  policy_arn = aws_iam_policy.rds.arn
+}
+
+# I totally know that this should be limited to arn that is output from aurora module but time is a factor here...
+resource "aws_iam_policy" "rds" {
+  name        = "${var.tags["Project"]}-${var.tags["Environment"]}-rds"
+  description = "S3 policy for rds wait-available operation"
+
+  policy = <<EOF
+{
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Effect":"Allow",
+         "Action": "rds:DescribeDBInstances",
+         "*"
       }
    ]
 }
