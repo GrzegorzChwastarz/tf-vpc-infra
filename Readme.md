@@ -53,12 +53,18 @@ aws-vault exec [AWS-Profile] -- terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| db\_password | n/a | `string` | `"test998899"` | no |
+| db\_username | n/a | `string` | `"abuser"` | no |
 | region | n/a | `string` | `"eu-central-1"` | no |
-| s3\_buckets | n/a | `map` | <pre>{<br>  "s3_artifacts": {<br>    "s3_bucket_name": "vpce-lambda-artifacts"<br>  },<br>  "s3_destination": {<br>    "s3_bucket_name": "vpce-lambda-destination"<br>  },<br>  "s3_legacy": {<br>    "s3_bucket_name": "vpce-lambda-s3-trololo"<br>  }<br>}</pre> | no |
+| s3\_buckets | n/a | `map` | <pre>{<br>  "s3_artifacts": {<br>    "s3_bucket_name": "vpce-lambda-artifacts"<br>  },<br>  "s3_destination": {<br>    "s3_bucket_name": "vpce-lambda-destination"<br>  },<br>  "s3_legacy": {<br>    "s3_bucket_name": "vpce-lambda-s3-legacy"<br>  }<br>}</pre> | no |
 | tags | n/a | `map` | <pre>{<br>  "Environment": "dev",<br>  "Owner": "gchwastarz",<br>  "Project": "lambda-vpce"<br>}</pre> | no |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| aurora\_db\_password | n/a |
+| aurora\_db\_username | n/a |
+| aurora\_endpoint\_addr | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

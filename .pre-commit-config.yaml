@@ -6,5 +6,3 @@ repos:
         stages: [commit]
       - id: terraform_docs
         stages: [commit]
-      - id: terraform_tfsec
-        stages: [commit]
