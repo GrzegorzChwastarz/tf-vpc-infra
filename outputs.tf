@@ -3,9 +3,9 @@ output "aurora_endpoint_addr" {
 }
 
 output "aurora_db_username" {
-  value = module.aurora.username
+  value = module.aurora.db_username
 }
 
 output "aurora_db_password" {
-  value = module.aurora.password
+  value = module.aurora.db_password
 }

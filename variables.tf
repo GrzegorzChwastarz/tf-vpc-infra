@@ -5,7 +5,7 @@ variable "region" {
 variable "s3_buckets" {
   default = {
     s3_legacy = {
-      s3_bucket_name = "vpce-lambda-s3-trololo"
+      s3_bucket_name = "vpce-lambda-s3-legacy"
     },
     s3_destination = {
       s3_bucket_name = "vpce-lambda-destination"
@@ -14,6 +14,14 @@ variable "s3_buckets" {
       s3_bucket_name = "vpce-lambda-artifacts"
     }
   }
+}
+
+variable "db_username" {
+  default = "abuser"
+}
+
+variable "db_password" {
+  default = "test998899"
 }
 
 variable "tags" {
