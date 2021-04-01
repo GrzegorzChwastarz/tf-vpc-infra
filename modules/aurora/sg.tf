@@ -7,11 +7,11 @@ resource "aws_security_group" "this" {
 }
 
 resource "aws_security_group_rule" "ec2_rds_ingress" {
-  description = "Allow inbound connection from EC2 instance to RDS"
-  type = "ingress"
-  from_port = 5432
-  to_port = 5432 #3306
-  protocol = "tcp"
-  security_group_id = aws_security_group.this.id
+  description              = "Allow inbound connection from EC2 instance to RDS"
+  type                     = "ingress"
+  from_port                = 5432
+  to_port                  = 5432
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.this.id
   source_security_group_id = var.ec2_module.ec2_sg_id
 }
