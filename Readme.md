@@ -55,8 +55,12 @@ aws-vault exec [AWS-Profile] -- terraform destroy
 |------|-------------|------|---------|:--------:|
 | db\_password | n/a | `string` | `"test998899"` | no |
 | db\_username | n/a | `string` | `"abuser"` | no |
+| new\_s3\_prefix | n/a | `string` | `"avatar/"` | no |
+| number\_of\_db\_records | n/a | `string` | `"100"` | no |
+| number\_of\_files | n/a | `string` | `"100"` | no |
+| old\_s3\_prefix | n/a | `string` | `"image/"` | no |
 | region | n/a | `string` | `"eu-central-1"` | no |
-| s3\_buckets | n/a | `map` | <pre>{<br>  "s3_artifacts": {<br>    "s3_bucket_name": "vpce-lambda-artifacts"<br>  },<br>  "s3_destination": {<br>    "s3_bucket_name": "vpce-lambda-destination"<br>  },<br>  "s3_legacy": {<br>    "s3_bucket_name": "vpce-lambda-s3-legacy"<br>  }<br>}</pre> | no |
+| s3\_buckets | n/a | `map` | <pre>{<br>  "s3_artifacts": {<br>    "s3_bucket_name": "artifacts-bucket-challenge"<br>  },<br>  "s3_destination": {<br>    "s3_bucket_name": "ec2-destination-bucket-challenge"<br>  },<br>  "s3_lambda_target": {<br>    "s3_bucket_name": "lambda-event-target-bucket-challenge"<br>  },<br>  "s3_legacy": {<br>    "s3_bucket_name": "legacy-bucket-for-challenge"<br>  }<br>}</pre> | no |
 | tags | n/a | `map` | <pre>{<br>  "Environment": "dev",<br>  "Owner": "gchwastarz",<br>  "Project": "lambda-vpce"<br>}</pre> | no |
 
 ## Outputs
