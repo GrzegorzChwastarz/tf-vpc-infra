@@ -3,6 +3,10 @@ This code has been structured in such a way as to allow deployments to any AWS a
 Moreover, since vanilla Terraform is in effect here (no [Terragrunts](https://terragrunt.gruntwork.io/), no [Makefiles](https://git.nonprod.williamhill.plc/gaming/cloud/tools/gaming-makefile)),
 [any and all Terraform CLI's commands](https://www.terraform.io/docs/commands/index.html) can be used, e.g.:  
 
+Before running anything from bellow check readme of RUN_ONCE repo. It's there to create S3 bucket and DynamoDB locking table for this, main part.
+
+You can use any credentials provider/store solution. aws-vault is just example.  
+
 **a)** sample init
 ```bash
 aws-vault exec [AWS-Profile] -- terraform init \
