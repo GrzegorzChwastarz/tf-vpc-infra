@@ -19,7 +19,6 @@ module "ec2" {
   db_endpoint_url       = module.aurora.cluster_address
   db_sg_id      = module.aurora.aurora_sg_id
   db_instance_id        = module.aurora.db_instance_identifier
-  db_region             = module.aurora.db_region
   db_name               = module.aurora.db_name
   db_password           = var.db_password
   db_username           = var.db_username
@@ -31,6 +30,7 @@ module "s3" {
   source         = "./modules/s3"
   for_each       = var.s3_buckets
   s3_bucket_name = each.value.s3_bucket_name
+  artifacts_bucket_name = var.s3_buckets.s3_artifacts.s3_bucket_name
 
   tags = var.tags
 }
@@ -39,9 +39,10 @@ module "aurora" {
   source              = "./modules/aurora"
   vpc_module          = module.vpc
   ec2_module          = module.ec2
-  tags                = var.tags
   rds_master_username = var.db_username
   rds_master_password = var.db_password
+
+  tags                = var.tags
 }
 
 /*module "sqs" {
