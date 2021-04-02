@@ -1,16 +1,16 @@
 data "aws_region" "current" {}
 
 resource "aws_rds_cluster" "this" {
-  cluster_identifier     = "${var.tags["Project"]}-${var.tags["Environment"]}-aurora"
-  database_name          = "s3_png_paths"
-  source_region          = data.aws_region.current.name
-  engine                 = "aurora-postgresql"
-  engine_version         = "11.9"
-  master_username        = var.rds_master_username
-  master_password        = var.rds_master_password
-  db_subnet_group_name   = aws_db_subnet_group.this.name
-  vpc_security_group_ids = [aws_security_group.this.id]
-  skip_final_snapshot = true
+  cluster_identifier        = "${var.tags["Project"]}-${var.tags["Environment"]}-aurora"
+  database_name             = "s3_png_paths"
+  source_region             = data.aws_region.current.name
+  engine                    = "aurora-postgresql"
+  engine_version            = "11.9"
+  master_username           = var.rds_master_username
+  master_password           = var.rds_master_password
+  db_subnet_group_name      = aws_db_subnet_group.this.name
+  vpc_security_group_ids    = [aws_security_group.this.id]
+  skip_final_snapshot       = true
   final_snapshot_identifier = "dummy-id" #https://github.com/hashicorp/terraform-provider-aws/issues/4910
 
   tags = var.tags

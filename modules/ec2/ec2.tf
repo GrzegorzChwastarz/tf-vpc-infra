@@ -3,7 +3,7 @@ data "aws_region" "current" {}
 resource "aws_instance" "this" {
   ami                    = data.aws_ami.amazon-linux-2.image_id
   instance_type          = var.instance_type
-  user_data      = data.template_cloudinit_config.config.rendered
+  user_data              = data.template_cloudinit_config.config.rendered
   subnet_id              = var.private_subnet_id
   vpc_security_group_ids = [aws_security_group.ec2_migration_tier.id]
   iam_instance_profile   = aws_iam_instance_profile.ec2_instance_profile.name
