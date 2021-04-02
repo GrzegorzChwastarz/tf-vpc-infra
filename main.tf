@@ -47,13 +47,8 @@ module "aurora" {
 
 module "lambda" {
   source = "./modules/lambda"
-  artifacts_bucket_name = var.s3_buckets.s3_artifacts.s3_bucket_name
+  s3_lambda_event_source_bucket = var.s3_buckets.s3_legacy.s3_bucket_name
+  s3_lambda_event_target_bucket = var.s3_buckets.s3_lambda_target.s3_bucket_name
 
   tags = var.tags
 }
-
-/*module "sqs" {
-  source = "./modules/sqs"
-  sqs_name = "s3-event-lambda-sqs"
-  sqs_dead_letter_name = "s3-event-lambda-dead-letter-sqs"
-}*/
