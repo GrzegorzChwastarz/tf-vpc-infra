@@ -9,16 +9,12 @@ resource "aws_lambda_function" "lambda" {
   tags = var.tags
 }
 
-data "aws_s3_bucket" "source_bucket" {
-  bucket = var.s3_lambda_event_source_bucket
-}
-
 resource "aws_lambda_permission" "allow_source_bucket" {
   statement_id  = "AllowExecutionFromS3Bucket"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.arn
   principal     = "s3.amazonaws.com"
-  source_arn    = data.aws_s3_bucket.source_bucket.arn
+  source_arn    = var.s3_lambda_event_source_bucket_arn
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
@@ -57,10 +53,6 @@ resource "aws_iam_role_policy_attachment" "s3_policy_lambda_attachment" {
   policy_arn = aws_iam_policy.s3_lambda.arn
 }
 
-data "aws_s3_bucket" "target_bucket" {
-  bucket = var.s3_lambda_event_target_bucket
-}
-
 resource "aws_iam_policy" "s3_lambda" {
   name        = "${var.tags["Project"]}-${var.tags["Environment"]}-s3-lambda"
   description = "S3 policy allowing operations on lambda target bucket"
@@ -90,8 +82,8 @@ resource "aws_iam_policy" "s3_lambda" {
             "s3:PutObjectTagging"
          ],
          "Resource": [
-            "${data.aws_s3_bucket.source_bucket.arn}/*",
-            "${data.aws_s3_bucket.target_bucket.arn}/*"
+            "${var.s3_lambda_event_source_bucket_arn}/*",
+            "${var.s3_lambda_event_target_bucket_arn}/*"
           ]
       }
    ]

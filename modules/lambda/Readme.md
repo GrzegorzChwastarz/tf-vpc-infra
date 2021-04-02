@@ -18,7 +18,9 @@ No requirements.
 | new\_s3\_prefix | n/a | `any` | n/a | yes |
 | old\_s3\_prefix | n/a | `any` | n/a | yes |
 | s3\_lambda\_event\_source\_bucket | n/a | `any` | n/a | yes |
+| s3\_lambda\_event\_source\_bucket\_arn | n/a | `any` | n/a | yes |
 | s3\_lambda\_event\_target\_bucket | n/a | `any` | n/a | yes |
+| s3\_lambda\_event\_target\_bucket\_arn | n/a | `any` | n/a | yes |
 | tags | n/a | `any` | n/a | yes |
 
 ## Outputs

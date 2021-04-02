@@ -48,11 +48,14 @@ module "aurora" {
 }
 
 module "lambda" {
-  source                        = "./modules/lambda"
-  s3_lambda_event_source_bucket = var.s3_buckets.s3_legacy.s3_bucket_name
-  s3_lambda_event_target_bucket = var.s3_buckets.s3_lambda_target.s3_bucket_name
-  new_s3_prefix                 = var.new_s3_prefix
-  old_s3_prefix                 = var.old_s3_prefix
+  source                            = "./modules/lambda"
+  s3_lambda_event_source_bucket     = var.s3_buckets.s3_legacy.s3_bucket_name
+  s3_lambda_event_target_bucket     = var.s3_buckets.s3_lambda_target.s3_bucket_name
+  s3_lambda_event_source_bucket_arn = module.s3["s3_legacy"].s3_bucket_arn
+  s3_lambda_event_target_bucket_arn = module.s3["s3_lambda_target"].s3_bucket_arn
+  new_s3_prefix                     = var.new_s3_prefix
+  old_s3_prefix                     = var.old_s3_prefix
+
 
   tags = var.tags
 }

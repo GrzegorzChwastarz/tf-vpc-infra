@@ -21,6 +21,7 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
+| s3\_bucket\_arn | n/a |
 | s3\_bucket\_name | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
