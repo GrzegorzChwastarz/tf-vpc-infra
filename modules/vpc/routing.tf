@@ -1,3 +1,5 @@
+# There is no routing for summy sensitive as it will not be in use in this example anyway
+
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.this.id
 
