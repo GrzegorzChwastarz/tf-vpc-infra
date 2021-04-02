@@ -8,7 +8,7 @@ mkdir ./dummy_files && cd dummy_files
 for i in {1..${number_of_files}}; do dd if=/dev/urandom bs=1 count=1 of=file$i; done
 
 echo "Upload files as a content of legecy bucket"
-s3sync -tr ${region} . s3://${legacy_bucket_name}/image
+s3sync -tr ${region} . s3://${legacy_bucket_name}/image/
 
 echo "Wait In case Aurora instance won't spin up on time"
 aws rds wait \
