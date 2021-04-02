@@ -12,7 +12,7 @@ def lambda_handler(event, context):
     #specify from where file needs to be copied
     copy_object={'Bucket':source_bucket_name,'Key':file_name}
     #write copy statement
-    s3_client.copy_object(CopySource=copy_object,Bucket=destination_bucket_name,Key=file_name)
+    s3_client.copy_object(CopySource=copy_object,Bucket=destination_bucket_name,Key=file_name.replace("${old_s3_prefix}","${new_s3_prefix}"))
 
     return {
         'statusCode': 3000,

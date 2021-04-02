@@ -3,6 +3,8 @@ resource "local_file" "lambda_source" {
   content = templatefile("${path.module}/lambda_s3_event.tpl",
   {
     s3_lambda_event_target = var.s3_lambda_event_target_bucket
+    new_s3_prefix          = var.new_s3_prefix
+    old_s3_prefix          = var.old_s3_prefix
   })
 }
 
