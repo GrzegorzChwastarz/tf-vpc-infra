@@ -12,6 +12,9 @@ variable "s3_buckets" {
     },
     s3_artifacts = {
       s3_bucket_name = "vpce-lambda-artifacts"
+    },
+    s3_lambda_target = {
+      s3_bucket_name = "vpce-lambda-event-target"
     }
   }
 }
