@@ -19,6 +19,22 @@ variable "s3_buckets" {
   }
 }
 
+variable "new_s3_prefix" {
+  default = "avatar/"
+}
+
+variable "old_s3_prefix" {
+  default = "image/"
+}
+
+variable "number_of_files" {
+  default = "100"
+}
+
+variable "number_of_db_records" {
+  default = "100"
+}
+
 variable "db_username" {
   default = "abuser"
 }

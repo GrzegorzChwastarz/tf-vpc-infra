@@ -12,6 +12,7 @@ module "ec2" {
   vpce_s3           = module.vpc.vpce_s3
   ssm_sg_id         = module.vpc.ssm_endpoint_sg_id
   rds_endpoint_sg_id = module.vpc.rds_endpoint_sg_id
+  number_of_files = var.number_of_files
 
   # User Data provision scripts variables
   artifacts_bucket_name = var.s3_buckets.s3_artifacts.s3_bucket_name
@@ -22,6 +23,7 @@ module "ec2" {
   db_name               = module.aurora.db_name
   db_password           = var.db_password
   db_username           = var.db_username
+  number_of_db_records = var.number_of_db_records
 
   tags = var.tags
 }
@@ -49,6 +51,7 @@ module "lambda" {
   source = "./modules/lambda"
   s3_lambda_event_source_bucket = var.s3_buckets.s3_legacy.s3_bucket_name
   s3_lambda_event_target_bucket = var.s3_buckets.s3_lambda_target.s3_bucket_name
+  new_s3_prefix             = var.new_s3_prefix
 
   tags = var.tags
 }

@@ -22,9 +22,9 @@ variable "ec2_name" {
   default = "migration-tier"
 }
 
-variable "number_of_files" {
-  default = 100
-}
+variable "number_of_files" {}
+
+variable "number_of_db_records" {}
 
 variable "artifacts_bucket_name" {}
 
@@ -39,9 +39,5 @@ variable "db_password" {}
 variable "db_endpoint_url" {}
 
 variable "db_name" {}
-
-variable "number_of_db_records" {
-  default = "100"
-}
 
 variable "tags" {}
