@@ -8,7 +8,7 @@ def lambda_handler(event, context):
     #get object that has been uploaded
     file_name=event['Records'][0]['s3']['object']['key']
     #specify destination bucket
-    destination_bucket_name=${destination_bucket_name}
+    destination_bucket_name="${s3_lambda_event_target}"
     #specify from where file needs to be copied
     copy_object={'Bucket':source_bucket_name,'Key':file_name}
     #write copy statement
