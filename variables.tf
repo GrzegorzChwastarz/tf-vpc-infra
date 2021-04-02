@@ -5,7 +5,7 @@ variable "region" {
 variable "s3_buckets" {
   default = {
     s3_legacy = {
-      s3_bucket_name = "vpce-lambda-s3-legacy"
+      s3_bucket_name = "vpce-lambda-legacy"
     },
     s3_destination = {
       s3_bucket_name = "vpce-lambda-destination"
