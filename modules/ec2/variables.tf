@@ -32,8 +32,6 @@ variable "legacy_bucket_name" {}
 
 variable "db_instance_id" {}
 
-variable "db_region" {}
-
 variable "db_username" {}
 
 variable "db_password" {}

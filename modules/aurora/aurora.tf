@@ -1,7 +1,9 @@
+data "aws_region" "current" {}
+
 resource "aws_rds_cluster" "this" {
   cluster_identifier     = "${var.tags["Project"]}-${var.tags["Environment"]}-aurora"
   database_name          = "s3_png_paths"
-  source_region          = var.db_region
+  source_region          = data.aws_region.current.name
   engine                 = "aurora-postgresql"
   engine_version         = "11.9"
   master_username        = var.rds_master_username

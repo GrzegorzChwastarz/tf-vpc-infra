@@ -14,10 +14,6 @@ output "db_name" {
   value = aws_rds_cluster.this.database_name
 }
 
-output "db_region" {
-  value = var.db_region
-}
-
 output "aurora_sg_id" {
   value = aws_security_group.this.id
 }

@@ -20,15 +20,10 @@ resource "aws_instance" "this" {
   )
 }
 
+# Parts order here doesn't matter as order of execution on the machine is evaluated alphabetically. That's the reson of `a-`
 data "template_cloudinit_config" "config" {
   gzip          = true
   base64_encode = true
-
-  part {
-    filename     = "s3-migrator-installer.sh"
-    content_type = "text/x-shellscript"
-    content      = data.template_file.s3_migrator_installer.rendered
-  }
 
   part {
     filename     = "postgresql-client-installer.sh"
@@ -36,6 +31,11 @@ data "template_cloudinit_config" "config" {
     content      = data.template_file.postgresql_client_installer.rendered
   }
 
+  part {
+    filename     = "a-s3-migrator-installer.sh"
+    content_type = "text/x-shellscript"
+    content      = data.template_file.s3_migrator_installer.rendered
+  }
 }
 
 data "template_file" "s3_migrator_installer" {
@@ -54,7 +54,6 @@ data "template_file" "postgresql_client_installer" {
     number_of_files      = var.number_of_files
     legacy_bucket_name   = var.legacy_bucket_name
     region               = data.aws_region.current.name
-    db_region            = var.db_region
     db_instance_id       = var.db_instance_id
     db_username          = var.db_username
     db_password          = var.db_password
