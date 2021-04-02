@@ -5,16 +5,16 @@ variable "region" {
 variable "s3_buckets" {
   default = {
     s3_legacy = {
-      s3_bucket_name = "vpce-lambda-legacy"
+      s3_bucket_name = "legacy-bucket-for-challenge"
     },
     s3_destination = {
-      s3_bucket_name = "vpce-lambda-destination"
+      s3_bucket_name = "ec2-destination-bucket-challenge"
     },
     s3_artifacts = {
-      s3_bucket_name = "vpce-lambda-artifacts"
+      s3_bucket_name = "artifacts-bucket-challenge"
     },
     s3_lambda_target = {
-      s3_bucket_name = "vpce-lambda-event-target"
+      s3_bucket_name = "lambda-event-target-bucket-challenge"
     }
   }
 }
