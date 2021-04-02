@@ -45,6 +45,13 @@ module "aurora" {
   tags                = var.tags
 }
 
+module "lambda" {
+  source = "./modules/lambda"
+  artifacts_bucket_name = var.s3_buckets.s3_artifacts.s3_bucket_name
+
+  tags = var.tags
+}
+
 /*module "sqs" {
   source = "./modules/sqs"
   sqs_name = "s3-event-lambda-sqs"
