@@ -32,7 +32,13 @@ aws-vault exec [AWS-Profile] -- terraform plan -target module.vpc
 ```bash
 aws-vault exec [AWS-Profile] -- terraform apply
 ```
-**e)** destroy
+**e)** destroy  
+Before destroy you will have to clear the buckets from any files. Please adjust and execute below commands to your needs:  
+```shell script
+aws-vault exec [AWS-Profile] -- aws s3 rm s3://artifacts-bucket-challenge --recursive --region eu-central-1
+aws-vault exec [AWS-Profile] -- aws s3 rm s3://lambda-event-target-bucket-challenge --recursive --region eu-central-1
+aws-vault exec [AWS-Profile] -- aws s3 rm s3://legacy-bucket-for-challenge --recursive --region eu-central-1
+```
 ```bash
 aws-vault exec [AWS-Profile] -- terraform destroy
 ```
@@ -59,10 +65,10 @@ aws-vault exec [AWS-Profile] -- terraform destroy
 |------|-------------|------|---------|:--------:|
 | db\_password | n/a | `string` | `"test998899"` | no |
 | db\_username | n/a | `string` | `"abuser"` | no |
-| new\_s3\_prefix | n/a | `string` | `"avatar/"` | no |
-| number\_of\_db\_records | n/a | `string` | `"100"` | no |
-| number\_of\_files | n/a | `string` | `"100"` | no |
-| old\_s3\_prefix | n/a | `string` | `"image/"` | no |
+| new\_s3\_prefix | Lambda specific var. Thanks to it lambda knows which prefix apply to object in destination bucket. | `string` | `"avatar"` | no |
+| number\_of\_db\_records | How many records will be created by instance during it's start | `string` | `"100"` | no |
+| number\_of\_files | How many files will be created by instance during it's start (and then synced with bucket legacy-bucket-for-challenge) | `string` | `"100"` | no |
+| old\_s3\_prefix | Lambda specific var. Thanks to it lambda knows which prefix remove from the file. | `string` | `"image"` | no |
 | region | n/a | `string` | `"eu-central-1"` | no |
 | s3\_buckets | n/a | `map` | <pre>{<br>  "s3_artifacts": {<br>    "s3_bucket_name": "artifacts-bucket-challenge"<br>  },<br>  "s3_destination": {<br>    "s3_bucket_name": "ec2-destination-bucket-challenge"<br>  },<br>  "s3_lambda_target": {<br>    "s3_bucket_name": "lambda-event-target-bucket-challenge"<br>  },<br>  "s3_legacy": {<br>    "s3_bucket_name": "legacy-bucket-for-challenge"<br>  }<br>}</pre> | no |
 | tags | n/a | `map` | <pre>{<br>  "Environment": "dev",<br>  "Owner": "gchwastarz",<br>  "Project": "lambda-vpce"<br>}</pre> | no |
