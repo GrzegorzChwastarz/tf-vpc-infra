@@ -5,7 +5,7 @@ amazon-linux-extras install postgresql10 -y
 
 echo "Create given number of files locally"
 mkdir ./dummy_files && cd dummy_files
-for i in {1..${number_of_files}}; do dd if=/dev/urandom bs=1 count=1 of=file$i; done
+for i in {1..${number_of_files}}; do dd if=/dev/urandom bs=80000 count=1 of="avatar-$i.png"; done
 
 echo "Upload files as a content of legecy bucket"
 s3sync -tr ${region} . s3://${legacy_bucket_name}/image/
