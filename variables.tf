@@ -19,20 +19,24 @@ variable "s3_buckets" {
   }
 }
 
-variable "new_s3_prefix" {
-  default = "avatar/"
+variable "old_s3_prefix" {
+  description = "Lambda specific var. Thanks to it lambda knows which prefix remove from the file."
+  default     = "image"
 }
 
-variable "old_s3_prefix" {
-  default = "image/"
+variable "new_s3_prefix" {
+  description = "Lambda specific var. Thanks to it lambda knows which prefix apply to object in destination bucket."
+  default     = "avatar"
 }
 
 variable "number_of_files" {
-  default = "100"
+  description = "How many files will be created by instance during it's start (and then synced with bucket legacy-bucket-for-challenge)"
+  default     = "100"
 }
 
 variable "number_of_db_records" {
-  default = "100"
+  description = "How many records will be created by instance during it's start"
+  default     = "100"
 }
 
 variable "db_username" {
