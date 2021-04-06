@@ -38,6 +38,7 @@ Before destroy you will have to clear the buckets from any files. Please adjust 
 aws-vault exec [AWS-Profile] -- aws s3 rm s3://artifacts-bucket-challenge --recursive --region eu-central-1
 aws-vault exec [AWS-Profile] -- aws s3 rm s3://lambda-event-target-bucket-challenge --recursive --region eu-central-1
 aws-vault exec [AWS-Profile] -- aws s3 rm s3://legacy-bucket-for-challenge --recursive --region eu-central-1
+aws-vault exec [AWS-Profile] -- aws s3 rm s3://lambda-vpce-tfstate --recursive --region eu-central-1  
 ```
 ```bash
 aws-vault exec [AWS-Profile] -- terraform destroy
